@@ -60,11 +60,21 @@ export const CarTool = (props) => {
 
     };
 
+    const saveCar = (updatedCar) => {
+        console.log("updateCar->",updatedCar);
+        setCars([
+            ...cars.map( car => 
+                            (car.id === updatedCar.id)
+                            ? updatedCar
+                            : car ),
+        ]);
+    };
+
     return (
         <>
             <ToolHeader headerText="Car Tool" />
             
-            <CarTable cars={cars} onDeleteClick={deleteCar} />
+            <CarTable cars={cars} onDeleteClick={deleteCar} onSaveCar={saveCar}/>
 
             <CarForm buttonText="Add Car" onSubmitCar={addCar}/>
 

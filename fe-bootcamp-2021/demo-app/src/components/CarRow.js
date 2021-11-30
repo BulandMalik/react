@@ -27,6 +27,11 @@ export const CarRow = (props) => {
         props.onDeleteCar(e.target.id);
     };
 
+    const editCar = () => {
+        console.log(props.car.id);
+        props.onEditCar(props.car.id);
+    };
+
     return (
         <tr key={props.car.id}>
             <td>{props.car.id}</td>
@@ -39,6 +44,7 @@ export const CarRow = (props) => {
                 <form>
                     <button type="button" id={props.car.id} onClick={deleteCar}>Delete</button>
                     <button type="button" onClick={deleteMe}>Delete</button>
+                    <button type="button" onClick={editCar}>Edit</button>
                 </form>
             </td>
         </tr>

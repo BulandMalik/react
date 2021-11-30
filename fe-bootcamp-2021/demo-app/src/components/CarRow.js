@@ -16,6 +16,17 @@ export const CarRow = (props) => {
     });
 */
 
+    const deleteMe = () => {
+        console.log("props.car.id: ",props.car.id);
+        props.onDeleteCar(props.car.id);
+    };
+
+    //should not use dom element to store data
+    const deleteCar = (e) => {
+        console.log(e.target.id);
+        props.onDeleteCar(e.target.id);
+    };
+
     return (
         <tr key={props.car.id}>
             <td>{props.car.id}</td>
@@ -24,6 +35,12 @@ export const CarRow = (props) => {
             <td>{props.car.year}</td>
             <td>{props.car.color}</td>
             <td>{props.car.price}</td>
+            <td>
+                <form>
+                    <button type="button" id={props.car.id} onClick={deleteCar}>Delete</button>
+                    <button type="button" onClick={deleteMe}>Delete</button>
+                </form>
+            </td>
         </tr>
     );
 };

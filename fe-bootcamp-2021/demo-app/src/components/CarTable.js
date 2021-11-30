@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 export const CarTable = (props) => {
 
+    const onDeleteCar = (carId) => {
+        props.onDeleteClick( carId );
+    };
+
     return (
         <>
             <table border="1">
@@ -14,10 +18,11 @@ export const CarTable = (props) => {
                         <th>Year</th>
                         <th>Color</th>
                         <th>Price</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {props.cars.map( car => <CarRow key={car.id} car={car} /> )}
+                    {props.cars.map( car => <CarRow key={car.id} car={car} onDeleteCar={onDeleteCar}/> )}
                 </tbody>
             </table>   
         </>     

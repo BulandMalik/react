@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ToolHeader } from './ToolHeader';
-import { CarTable } from './CarTable';
+
+
 
 export const CarTool = (props) => {
 
@@ -23,6 +23,19 @@ export const CarTool = (props) => {
             [e.target.name]: e.target.value === 'number' ? parseInt(e.target.value,10) : e.target.value,
         });
     };
+
+    const carListItems = cars.map( car => {
+        return (
+            <tr key={car.id}>
+                <td>{car.id}</td>
+                <td>{car.model}</td>
+                <td>{car.make}</td>
+                <td>{car.year}</td>
+                <td>{car.color}</td>
+                <td>{car.price}</td>
+            </tr>
+        )
+    });
 
     const addCar = () => {
 
@@ -49,9 +62,24 @@ export const CarTool = (props) => {
 
     return (
         <>
-            <ToolHeader headerText="Car Tool" />
-            
-            <CarTable cars={cars} />
+            <header>
+                <h1>Car Tool</h1>
+            </header>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                        <th>Color</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {carListItems}                 
+                </tbody>
+            </table>
 
             <form>
                 <label>

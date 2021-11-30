@@ -1,8 +1,5 @@
 import {useState} from "react";
 
-import { ToolHeader } from './ToolHeader';
-import { ColorList } from './ColorList';
-
 export const ColorTool = (props) => {
 
     //worst line of code ever
@@ -18,8 +15,6 @@ export const ColorTool = (props) => {
         name: '',
         hexcode: ''
     });
-
-    const [colors, setColors] = useState([...props.colors]);
 
     const change = e => {
         //console.log(e);
@@ -37,24 +32,12 @@ export const ColorTool = (props) => {
     //props.colors = []; //error
     console.log(Object.isFrozen(props));//is Frozen
 
-    const colorListItems = colors.map( color => {
+    const colorListItems = props.colors.map( color => {
         return <li key={color.id} script='text-color="red"'>{color.name}</li>;
     })
 
     const addColor = () => {
-        setColors([
-            ...colors,
-            {
-                ...colorForm,
-                //id: colors.length +1 //if you delete things, you will have duplicates
-                id: Math.max(...colors.map(c => c.id), 0) +1,     
-            }
-        ]);
 
-        //clear the form
-        setColorForm({
-            name: '', hexcode: ''
-        });
     };
 
     //console.log(props.colors);
@@ -75,8 +58,16 @@ export const ColorTool = (props) => {
 
     return (
         <>
-            <ToolHeader headerText="Color Tool" />
-            <ColorList colors={colors} />
+            <header>
+                <h1>Color Tool</h1>
+            </header>
+            <ul>
+                {props.colors.map( color =>
+                    <li key={color.id}>
+                        {color.name}
+                    </li>)
+                }
+            </ul>
 
             <form>
                 <label>

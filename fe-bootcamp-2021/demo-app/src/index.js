@@ -3,6 +3,8 @@ import {render} from 'react-dom'; //curly braces because its a named import
 import { ColorTool } from './components/ColorTool'
 import { CarTool } from './components/CarTool'
 
+import './index.css';
+
 const colorList = [
   {id:1, name: 'Red', hexcode:'ff0000'},
   {id:2, name: 'Green', hexcode:'00ff00'},

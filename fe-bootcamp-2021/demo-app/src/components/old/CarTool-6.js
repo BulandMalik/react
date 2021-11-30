@@ -1,10 +1,6 @@
 import { useState } from "react";
-import { ToolHeader } from './ToolHeader';
-import { CarTable } from './CarTable';
 
 export const CarTool = (props) => {
-
-    const [cars, setCars] = useState([...props.cars]);
 
     const [carForm, setCarForm] = useState({
         model: '',
@@ -19,39 +15,46 @@ export const CarTool = (props) => {
         setCarForm({
 
             ...carForm,
-            //[e.target.name]: e.target.value
-            [e.target.name]: e.target.value === 'number' ? parseInt(e.target.value,10) : e.target.value,
+
+            [e.target.name]: e.target.value
         });
     };
 
-    const addCar = () => {
-
-        //add new car
-        setCars([
-            ...cars,
-            {
-                ...carForm,
-                id: Math.max( ...cars.map(c => c.id),0) +1,
-            }
-        ]);
-
-        //clear Car Form
-        setCarForm({
-            model: '',
-            make: '',
-            year: 0,
-            color: '',
-            price: 0    
-        })
-    };
+    const carListItems = props.cars.map( car => {
+        return (
+            <tr key={car.id}>
+                <td>{car.id}</td>
+                <td>{car.model}</td>
+                <td>{car.make}</td>
+                <td>{car.year}</td>
+                <td>{car.color}</td>
+                <td>{car.price}</td>
+            </tr>
+        )
+    });
 
     console.log(carForm);
 
     return (
         <>
-            <ToolHeader headerText="Car Tool" />
-            
-            <CarTable cars={cars} />
+            <header>
+                <h1>Car Tool</h1>
+            </header>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                        <th>Color</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {carListItems}                 
+                </tbody>
+            </table>
 
             <form>
                 <label>
@@ -73,8 +76,7 @@ export const CarTool = (props) => {
                 <label>
                     Price:
                     <input type="text" name="price" value={carForm.price} onChange={change} />
-                </label>     
-                <button type="button" onClick={addCar}>Add Car</button>                                                           
+                </label>                                                                
             </form>
         </>
     )

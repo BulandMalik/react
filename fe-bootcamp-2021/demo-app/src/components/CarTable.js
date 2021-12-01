@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export const CarTable = (props) => {
 
-    const [editCarId, setEditCarId ] = useState('');
+    const [editCarId, setEditCarId ] = useState(-1);
 
     const onDeleteCar = (carId) => {
         props.onDeleteClick( carId );
@@ -14,11 +14,11 @@ export const CarTable = (props) => {
     const onSaveCar = (updatedCar) => {
         console.log("Save Car -->",updatedCar);
         props.onSaveCar(updatedCar);
-        setEditCarId('');
+        setEditCarId(-1);
     };
 
     const onCancelEditCar = () => {
-        setEditCarId('');
+        setEditCarId(-1);
     };
 
     const onEditCar = (carId) => {

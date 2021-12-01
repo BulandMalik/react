@@ -4,6 +4,7 @@ export const CarEditRow = (props) => {
 
     const [carEditRow, setCarEditRow] = useState({
         ...props.car
+        //better to ber specifc which feilds can be changed, like id cannot
     });
 
     //capture key press events

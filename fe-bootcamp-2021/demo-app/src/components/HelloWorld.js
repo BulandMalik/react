@@ -1,9 +1,13 @@
-//Arrow Function
 export const HelloWorld = () => {
 
-    return (
-      <>
-        <h1>Hello, World!</h1>
-      </>
-    ); //JSX is not a valid JavaScript
-  }
+  // return React.createElement('div', null,
+  //  React.createElement('h1', null, 'Hello, World!'),
+  //  React.createElement('span', null, 'test'));
+  return (
+    <>
+      <h1>Hello, World!</h1>
+      <span>test</span>
+    </>
+  ); // JSX is not valid JavaScript
+
+};

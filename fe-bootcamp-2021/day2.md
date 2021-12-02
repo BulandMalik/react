@@ -65,3 +65,28 @@
 ![](./images/callback-1.png)
 
 10. 
+
+
+
+
+
+## Day3
+1. earlier react versions, only way to mantain states b/w fucntions is via class components. Instance of the class based components have state data + render logic
+2. FiberNodes
+    1. React decouples state management with rendering logic. State does not have to be stored with components
+    2. create component with render method --> state data with element and element data with VDOM (element in VDom is called FiberNode).
+    3. All we have to dupply is the render logic
+    4. Hook them together with State Hooks --> Linkedlist of state data with FiberNode in VDom
+        1. FiberNode -> memoisedState -> state data + next
+3. Sorting
+```
+const nameSortDesc = (a,b) => { if (a.name > b.name) return -1; if (a.name < b.name) return 1; return 0; };
+
+const nameSort = (a,b) => { if (a.name > b.name) return 1; if (a.name < b.name) return -1; return 0; };
+
+const people = [ {name:'Bob'}, {name:'Abe'}, {name:'Sally'}]
+
+people.sort(nameSortDesc)
+
+people.sort(nameSort)
+```

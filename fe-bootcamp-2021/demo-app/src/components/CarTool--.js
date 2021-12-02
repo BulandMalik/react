@@ -1,5 +1,4 @@
 import { useState} from "react";
-import { useSortedList, SORT_ASC, SORT_DESC } from '../hooks/useSortedList';
 
 import { useList } from "../hooks/useList";
 
@@ -10,14 +9,9 @@ import { CarForm } from './CarForm';
 
 export const CarTool = (props) => {
 
-  //const [ cars, appendCar, replaceCar, removeCar ] = useList([ ...props.cars ]);
+  const [ cars, appendCar, replaceCar, removeCar ] = useList([ ...props.cars ]);
 
   const [ editCarId, setEditCarId ] = useState(-1);
-
-  const [
-    sortedCars, appendCar,replaceCar,removeCar,
-    sortCol, setSortCol, sortDir, setSortDir
-  ] = useSortedList([ ...props.cars ], 'id', SORT_ASC);
 
   const addCar = newCar => {
     appendCar(newCar);
@@ -42,24 +36,12 @@ export const CarTool = (props) => {
     setEditCarId(-1);
   };
 
-  const sortCars = (colName) => {
-
-    console.log("colName:",colName);
-    if ( sortDir === SORT_DESC) {
-      setSortDir(SORT_ASC);
-    } else {
-      setSortDir(SORT_DESC);
-    }
-    setSortCol(colName);
-  };
-
   return (
     <>
       <ToolHeader headerText="Car Tool" />
-      <CarTable cars={sortedCars} editCarId={editCarId}
+      <CarTable cars={cars} editCarId={editCarId}
         onEditCar={editCar} onDeleteCar={deleteCar}
-        onSaveCar={saveCar} onCancelCar={cancelCar} 
-        onSort={sortCars} sortCol={sortCol} sortDir={sortDir}/>
+        onSaveCar={saveCar} onCancelCar={cancelCar} />
       <CarForm buttonText="Add Car" onSubmitCar={addCar} />
       <ToolFooter companyName="A Cool Company, Inc." />
     </>

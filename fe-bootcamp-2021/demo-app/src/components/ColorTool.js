@@ -1,57 +1,37 @@
-import {useState} from "react";
+import { useSortList, SORT_ASC, SORT_DESC } from "../hooks/useSortList";
 
-import { ToolHeader } from './ToolHeader';
+import { ToolHeader } from "./ToolHeader";
 import { ColorList } from './ColorList';
-import { ColorForm } from "./ColorForm";
+import { ColorForm } from './ColorForm';
 
 export const ColorTool = (props) => {
 
-    //worst line of code ever
-    /*props.colors.push({
-        id:4, name: 'purple', hexcode: 'ff00ff',
-    });*/
+  const [ colors, addColor, replaceItem, removeItem, 
+          sortCol, setSortCol, sortDir, setSortDir ] = useSortList([ ...props.colors ], 'id', SORT_ASC);
 
-    const [colors, setColors] = useState([...props.colors]);
+  const sortColor = () => {
+    if (sortCol === 'name' && sortDir === SORT_DESC) {
+      setSortCol('id');
+      setSortDir(SORT_ASC);
+    } else if (sortCol === 'id') {
+      setSortCol('name');
+    } else {
+      setSortDir(SORT_DESC);
+    }
+  };
 
-    //props.colors = []; //error
-    console.log(Object.isFrozen(props));//is Frozen
+  return (
+    <>
+      <ToolHeader headerText="Color Tool" />
+      <ColorList colors={colors} onDeleteColor={removeItem}/>
+      <ColorForm buttonText="Add Color" onSubmitColor={addColor}/>
+      <button type="button" id="sort" onClick={sortColor}>Current Sort: {sortCol}-{sortDir}</button>
+    </>
+  );
 
-    const colorListItems = colors.map( color => {
-        return <li key={color.id} script='text-color="red"'>{color.name}</li>;
-    })
+};
 
-    const addColor = (newColor) => {
-        setColors([
-            ...colors,
-            {
-                ...newColor,
-                //id: colors.length +1 //if you delete things, you will have duplicates
-                id: Math.max(...colors.map(c => c.id), 0) +1,     
-            }
-        ]);
 
-    };
-
-    //console.log(props.colors);
-    //console.log(colorListItems);
-/*
-    return (
-        <>
-            <header>
-                <h1>Color Tool</h1>
-            </header>
-            <ul>
-                {colorListItems}
-            </ul>
-        </>
-    )
-*/
-
-    return (
-        <>
-            <ToolHeader headerText="Color Tool" />
-            <ColorList colors={colors} />
-            <ColorForm buttonText="Add Color" onSubmitColor={addColor} />
-        </>
-    )
-}
+ColorTool.defaultProps = {
+  colors: [],
+};

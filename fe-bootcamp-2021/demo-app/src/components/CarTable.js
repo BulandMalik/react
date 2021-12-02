@@ -1,63 +1,49 @@
-import { CarRow } from './CarRow';
+import { CarViewRow } from './CarViewRow';
 import { CarEditRow } from './CarEditRow';
-import PropTypes from 'prop-types';
-import { useState } from "react";
 
-export const CarTable = (props) => {
+const tableHeaders=[
+  ['Id','id'],
+  ['Make','make'],
+  ['Model','model'],
+  ['Year','year'],
+  ['Color','color'],
+  ['Price','price'],
+]
+export const CarTable = props => {
 
-    const [editCarId, setEditCarId ] = useState(-1);
+  const sortByMake = (text) => {
+    props.onSort(text);
+  };
 
-    const onDeleteCar = (carId) => {
-        props.onDeleteClick( carId );
-    };
+  const sortDirectionIndicator = (sortCol) => {
+    if (sortCol === props.sortCol) {
+      return props.sortDir === 'asc' ? ' v' : ' ^';
+    }
+    return '';
+  };  
 
-    const onSaveCar = (updatedCar) => {
-        console.log("Save Car -->",updatedCar);
-        props.onSaveCar(updatedCar);
-        setEditCarId(-1);
-    };
+  return (
+    <table>
+      <thead>
+        <tr>
+          {tableHeaders.map(([ header, field ]) => <th key={field}>
+            <button type="button" onClick={() => props.onSort(field)}>
+              {header}{sortDirectionIndicator(field)}
+            </button>
+          </th>)}          
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {props.cars.map(car =>
+          props.editCarId === car.id
+            ? <CarEditRow key={car.id} car={car}
+                onSaveCar={props.onSaveCar} onCancelCar={props.onCancelCar} />
+            : <CarViewRow key={car.id} car={car}
+                onEditCar={props.onEditCar} onDeleteCar={props.onDeleteCar} />)}
+      </tbody>
+    </table>
 
-    const onCancelEditCar = () => {
-        setEditCarId(-1);
-    };
-
-    const onEditCar = (carId) => {
-        setEditCarId(carId);
-    };    
-
-    return (
-        <>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Year</th>
-                        <th>Color</th>
-                        <th>Price</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.cars.map( car => 
-                                    //console.log(car.id, editCarId, (car.id === editCarId))
-                                    ( parseInt(car.id,10) !== parseInt(editCarId,10) )
-                                    ? <CarRow key={car.id} car={car} onDeleteCar={onDeleteCar} onEditCar={onEditCar}/>
-                                    : <CarEditRow key={car.id} car={car} onSaveCar={onSaveCar} onCancelEditCar={onCancelEditCar}/> 
-                                )}
-                </tbody>
-            </table>   
-        </>     
-    );
+  );
 
 };
-
-//default props are react specific thing and not js
-CarTable.defaultProps = {
-    cars: [],
-}
-
-CarTable.propTypes = {
-    cars: PropTypes.array.isRequired
-}

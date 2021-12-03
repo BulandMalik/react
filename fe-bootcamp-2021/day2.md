@@ -90,3 +90,58 @@ people.sort(nameSortDesc)
 
 people.sort(nameSort)
 ```
+
+
+#### Day3
+1. Store Pattern - Using Custom Hook
+    1. A store is basically just a plain JavaScript object that allows components to share state.In a way, we can think of a store as a database. On the most fundamental level, both constructs allow us to store data in some form or another.
+2. Custom Hook - uses to move state mamnagement and move it to a hook so that we can reuse 
+3. Linters + Type Checkings
+4. Object vs Array Destructuring
+5. Model Data (Component Model Data)
+    1. Props
+    2. State
+    3. props & state descrbiing the relationship b/w data & the components is defined as props & state
+    4. Context
+        1. easily abused
+        2. its global scopped for the compoent tree
+        3. 1 Provider & N Consumers
+        4. Multiple Contexts
+![](./images/component-model-data-1.png)
+![](./images/component-model-data-2.png)
+
+6. npm install react-router-dom / npm install react-router-dom@5
+7. Router captures value of the location bar and pass it to the context
+```
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+  <Router>
+    <nav>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/color-tool">Color Tool</Link></li>
+        <li><Link to="/car-tool">Car Tool</Link></li>
+      </ul>
+    </nav>
+    <Route path="/" exact>
+      <h1>Home</h1>
+    </Route>
+    <Route path="/color-tool">
+      <ColorToolStoreProvider colors={colorList}>
+        <ColorTool />
+      </ColorToolStoreProvider>
+    </Route>
+    <Route path="/car-tool">
+      <CarToolStoreProvider cars={carList}>
+        <CarTool />
+      </CarToolStoreProvider>
+    </Route>
+  </Router>,
+```
+
+8. Reset CSS --- https://meyerweb.com/eric/tools/css/reset/
+9. Flexbox Learning
+    1. https://flexboxfroggy.com/
+    2. https://cssgridgarden.com/
+
+10.

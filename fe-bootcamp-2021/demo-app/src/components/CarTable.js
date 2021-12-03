@@ -10,11 +10,11 @@ const tableHeaders=[
   ['Price','price'],
 ]
 export const CarTable = props => {
-
+/*
   const sortByMake = (text) => {
     props.onSort(text);
   };
-
+*/
   const sortDirectionIndicator = (sortCol) => {
     if (sortCol === props.sortCol) {
       return props.sortDir === 'asc' ? ' v' : ' ^';

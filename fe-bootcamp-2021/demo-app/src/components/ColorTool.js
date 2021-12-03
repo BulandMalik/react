@@ -1,31 +1,38 @@
-import { useSortList, SORT_ASC, SORT_DESC } from "../hooks/useSortList";
+//import { useColorToolStore } from "../hooks/useColorToolStore";
+import { useColorToolStoreContext } from "../context/colorToolStoreContext";
 
-import { ToolHeader } from "./ToolHeader";
+//import { ToolHeader } from "./ToolHeader";
 import { ColorList } from './ColorList';
 import { ColorForm } from './ColorForm';
 
-export const ColorTool = (props) => {
+//export const ColorTool = ( {cars: initialCars} ) => {
+//export const ColorTool = (props) => {
+export const ColorTool = () => {
 
-  const [ colors, addColor, replaceItem, removeItem, 
-          sortCol, setSortCol, sortDir, setSortDir ] = useSortList([ ...props.colors ], 'id', SORT_ASC);
+ /* //Array Destructuring
+  const [
+    sortedColors,addColor,replaceColor,
+    removeColor,sortCol, sortDir, sortColors] 
+  = useColorToolStore([...props.colors]);
+*/
 
-  const sortColor = () => {
-    if (sortCol === 'name' && sortDir === SORT_DESC) {
-      setSortCol('id');
-      setSortDir(SORT_ASC);
-    } else if (sortCol === 'id') {
-      setSortCol('name');
-    } else {
-      setSortDir(SORT_DESC);
-    }
-  };
+/* //Object Destructuring
+  const {}
+    sortedColors,addColor,replaceColor,
+    removeColor,sortCol, sortDir, sortColors}
+  = useColorToolStore([...props.colors]);
+*/
+//const store = useColorToolStore([...initialCars]);
+//const store = useColorToolStore([...props.colors]);
+
+//this makes this children a consumer of Context
+const store = useColorToolStoreContext();
 
   return (
     <>
-      <ToolHeader headerText="Color Tool" />
-      <ColorList colors={colors} onDeleteColor={removeItem}/>
-      <ColorForm buttonText="Add Color" onSubmitColor={addColor}/>
-      <button type="button" id="sort" onClick={sortColor}>Current Sort: {sortCol}-{sortDir}</button>
+      <ColorList colors={store.sortedColors} onDeleteColor={store.removeColor}/>
+      <ColorForm buttonText="Add Color" onSubmitColor={store.addColor}/>
+      <button type="button" id="sort" onClick={store.sortColors}>Current Sort: {store.sortCol}-{store.sortDir}</button>
     </>
   );
 

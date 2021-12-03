@@ -144,4 +144,17 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
     1. https://flexboxfroggy.com/
     2. https://cssgridgarden.com/
 
-10.
+10.Redux
+    1. State (cars, editCarId) ---> Selector (fn that selects data from the state) ---> UI (react) hooks/props ---> Action (type + payload) ---> Reducer (oldState, update ==> new State) --> State (goes back to start)
+
+    2. Reducer never mutates ---> its a pure function (only input comes from parameters), parameters not mutated, pure functiona does not mutate
+
+    3. Reducer generates new State
+        1. Adding a car
+        2. New Car
+        3. Old Cars + New Car
+        4. New Satte with updated cars
+
+    4. Redux Store (Reducer + State (Data))
+        1. Dispatching actions into the store ---> useDisptach Hook
+        2. Subscribing to the Store (Selector) ---> useSelector Hook

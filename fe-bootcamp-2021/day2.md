@@ -92,7 +92,7 @@ people.sort(nameSort)
 ```
 
 
-#### Day3
+#### Day4
 1. Store Pattern - Using Custom Hook
     1. A store is basically just a plain JavaScript object that allows components to share state.In a way, we can think of a store as a database. On the most fundamental level, both constructs allow us to store data in some form or another.
 2. Custom Hook - uses to move state mamnagement and move it to a hook so that we can reuse 
@@ -143,6 +143,9 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 9. Flexbox Learning
     1. https://flexboxfroggy.com/
     2. https://cssgridgarden.com/
+    3. https://css-tricks.com/introduction-fr-css-unit/
+![](./images/box-model.png)
+
 
 10.Redux
     1. State (cars, editCarId) ---> Selector (fn that selects data from the state) ---> UI (react) hooks/props ---> Action (type + payload) ---> Reducer (oldState, update ==> new State) --> State (goes back to start)
@@ -158,3 +161,149 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
     4. Redux Store (Reducer + State (Data))
         1. Dispatching actions into the store ---> useDisptach Hook
         2. Subscribing to the Store (Selector) ---> useSelector Hook
+![](./images/what-is-redux.png)
+
+
+
+### Day5
+1. standard Redux app has only one store
+2. npm install redux react-redux redux-thunk
+3. Provider creates a context provided by react-redux
+4. typing inpout fields we use local state and not redux
+5. Sequence of things
+    1. Create Actions
+    ```
+        //define list of actions calculator will do
+
+        export const ADD_ACTION = "ADD";
+        export const SUBSTRACT_ACTION = 'SUBTRACT';
+        export const MULTIPLY_ACTION = 'multiply';
+        export const DIVIDE_ACTION = 'divide';
+
+        //function to produce payload for each action
+        export const createAddAction = value => (
+            { type: ADD_ACTION, payload: { value } }
+        );
+
+        export const createSubstractAction = value => (
+            { type: SUBSTRACT_ACTION, payload: { value } }
+        );
+
+        export const createMultiplyAction = value => (
+            { type: MULTIPLY_ACTION, payload: { value } }
+        );
+
+        export const createDivideAction = value => (
+            { type: DIVIDE_ACTION, payload: { value } }
+        );
+    ```
+    2. Create Reducers
+    ```
+        import { ADD_ACTION, SUBSTRACT_ACTION, MULTIPLY_ACTION, DIVIDE_ACTION } from "../actions/calcToolActions";
+
+
+        //newstate = reducer (oldSatte, action)
+
+        export const calcToolReducers = (state = {result: 0}, action) => {
+            switch (action.type) {
+                case ADD_ACTION:
+                    return {
+                        ...state,
+                        result: state.result + action.payload.value,
+                    }
+                case SUBSTRACT_ACTION:
+                    return {
+                        ...state,
+                        result: state.result - action.payload.value,
+                    }
+                case MULTIPLY_ACTION:
+                    return {
+                        ...state,
+                        result: state.result * action.payload.value,
+                }
+                case DIVIDE_ACTION:
+                    return {
+                        ...state,
+                        result: state.result / action.payload.value,
+                }
+                default:
+                    return state; //return original state
+            }
+
+        };    
+    ```
+    3. Create Store
+    ```
+        import { createStore } from 'redux';
+
+        import { calcToolReducers } from '../reducers/calcToolReducers';
+
+        export const calcToolStore = createStore(calcToolReducers);
+    ```
+    4. Create Hook -- `useDispatch & useSelector hooks`
+    ```
+        import { useDispatch, useSelector } from "react-redux";
+        import { bindActionCreators } from "redux";
+
+        import {
+            createAddAction, createSubstractAction, 
+            createMultiplyAction, createDivideAction
+        } from '../actions/calcToolActions';
+
+        export const useCalcToolStore = () => {
+
+            const result = useSelector(state => state.result);
+
+            const disptach = useDispatch();
+            const boundActions = bindActionCreators({
+                add: createAddAction,
+                subtract: createSubstractAction,
+                multiply: createMultiplyAction,
+                divide: createDivideAction,
+            }, disptach);
+
+            return {
+                result,
+                ...boundActions,
+            }
+
+        };    
+    ```
+    5. Crete React Component
+    ```
+        import { useState } from 'react';
+
+        import {useCalcToolStore} from '../hooks/useCalcToolStore';
+
+        export const CalcTool = () => {
+
+            const {result, add, subtract, multiply, divide} =  useCalcToolStore();
+
+            const [numInput, setNumInput] = useState(0);
+            return (
+                <div>
+                    <section>
+                        Result: {result}
+                    </section>
+                    <form>
+                        <label>
+                            Number:
+                            <input type="text" value={numInput}
+                                onChange={ ({target: {value}}) =>
+                                    setNumInput(parseInt(value,10))} />
+                        </label>
+                        <fieldset>
+                            <button type="button" 
+                                onClick={() => add(numInput)}>+</button>
+                            <button type="button" 
+                                onClick={() => subtract(numInput)}>-</button>
+                            <button type="button" 
+                                onClick={() => multiply(numInput)}>*</button>
+                            <button type="button" 
+                                onClick={() => divide(numInput)}>/</button>
+                        </fieldset>
+                    </form>
+                </div>
+            );
+        };
+    ```

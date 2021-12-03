@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <h1>My Website</h1>
+
+    <div id="banner">
+
+    </div>
+    <footer>
+        <p>@copy 2022. My Company</p>
+    </footer>
+
+    <!-- Your custom script here -->
+    <script type="text/babel">
+        const title = "Welcome to my Website!!!"
+        const subtitle = "React awesome course."
+        const address = "https://www.netninja.dev";
+
+        const handleClick = () => {
+            console.log("You disturbed me, I am sleeping !!!!!!");
+            console.log("Course Title is:", subtitle);
+        };
+
+        const handleClickWithEventCapturedObj = (e) => {
+            console.log("DO you know whom you clicked, its a ", e.target.type);
+        };
+
+        const Banner = () => {
+            return (
+                <div>
+                    <h2>{title}</h2>
+                    <p>{subtitle}</p>
+                    <p>Today date is : {new Date().toDateString()}</p>
+                    <p>Random number: {Math.random() * 100}</p>
+                    <a href={address}>More Courses</a>
+                    <button type="button" onClick={handleClick}>Click Me!</button>
+                    <button type="button" onClick={handleClickWithEventCapturedObj}>Captue Me!!!</button>
+                    <button type="button" onClick={() => console.log('Inline Function.....')}>Inline Function !!!</button>
+                </div>
+            );
+        };
+        //const getMessage = () => "Hello World";
+        //document.getElementById('output').innerHTML = getMessage();
+
+        ReactDOM.render( 
+            <Banner />,
+            document.getElementById('banner')
+        )
+    </script>    
+</body>
+</html>

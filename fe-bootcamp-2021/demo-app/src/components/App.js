@@ -53,7 +53,7 @@ export const App = () => {
                     </Route>  
                 </main>    
                 <aside>Sidebar</aside>
-                <ToolFooter footerText="Copyright 2021. A Cool Company, Inc."/>
+                <ToolFooter companyName="A Cool Company, Inc."/>
             </Layout>
     </Router>
     )

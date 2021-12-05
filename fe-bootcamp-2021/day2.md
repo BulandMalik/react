@@ -307,3 +307,6 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
             );
         };
     ```
+6. Redux combineRecuders - `dividing one big reducer into multiple reducers`
+
+7. 

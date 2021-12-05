@@ -1,11 +1,23 @@
 import { useSortedList, SORT_ASC, SORT_DESC } from '../hooks/useSortedList';
 import { useState} from "react";
 //import { useList } from "../hooks/useList";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import {
+    createAddAction
+  } from '../actions/carToolActions';
 
 export const useCarToolStore = initialCars => {
 
       //const [ cars, appendCar, replaceCar, removeCar ] = useList([ ...props.cars ]);
 
+    const result = useSelector(state => state.cars);
+    const history = useSelector(state => state.history);
+    const errorMessage = useSelector(state => state.errorMessage);
+
+    const dispatch = useDispatch();
+    
     const [ editCarId, setEditCarId ] = useState(-1);
 
     const [

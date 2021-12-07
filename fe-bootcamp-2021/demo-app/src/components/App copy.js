@@ -2,18 +2,14 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import { ColorTool } from './ColorTool'
 import { CarTool } from './CarTool'
-import { Provider } from 'react-redux';
 
-//import { ColorToolStoreProvider } from '../context/colorToolStoreContext';
-//import { CarToolStoreProvider } from '../context/carToolStoreContext';
+import { ColorToolStoreProvider } from '../context/colorToolStoreContext';
+import { CarToolStoreProvider } from '../context/carToolStoreContext';
 
 import { ToolHeader } from './ToolHeader';
 import { ToolFooter } from './ToolFooter';
 
 import { Layout } from './Layout';
-
-import { colorToolStore } from '../stores/colorToolStore';
-import { carToolStore } from '../stores/carToolStore';
 
 const colorList = [
   {id:1, name: 'Red', hexcode:'ff0000'},
@@ -46,14 +42,14 @@ export const App = () => {
                         <h1>Home</h1>
                     </Route>
                     <Route path="/color-tool">
-                        <Provider store={colorToolStore}>
+                        <ColorToolStoreProvider colors={colorList}>
                             <ColorTool />
-                        </Provider>
+                        </ColorToolStoreProvider>
                     </Route>
                     <Route path="/car-tool">
-                        <Provider store={carToolStore}>
+                        <CarToolStoreProvider cars={carList}>
                             <CarTool />
-                        </Provider>
+                        </CarToolStoreProvider>
                     </Route>  
                 </main>    
                 <aside>Sidebar</aside>

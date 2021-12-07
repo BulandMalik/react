@@ -310,3 +310,34 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 6. Redux combineRecuders - `dividing one big reducer into multiple reducers`
 
 7. 
+
+
+
+
+### Week2
+
+1. 3 main JS engines
+    1. Chromium
+    2. Monkey - Mozilla
+    3. Microsoft one
+2. written in C++ but can be written in any language
+3. Web Browsers
+    1. JS
+    2. DOM & JS mmeory are totally seperate
+    3. Networking modules
+        1. Web sockets
+        2. Ajaz calls
+        3 ....
+    4. Timers
+4. JS never talks to the outside world
+    1. talks with C++ modules
+    2. JS is a glue language for C++ modules
+5. JS is Single threaded but Host modules are multi threaded
+6. Host invokes a fucntion, goesd into the event loop queue
+7. Same Thread for JS/UI talks.
+    1. JS uses
+    2. UI rendering happens
+8. If JS takes lot of time on the thread than UI suffers (< # of frames /second)
+9. CPU Bound vs IO Bound processings
+10. For closure, Stack frames moved to heap to retain closure data
+11. when you refrence a var via closure, its not a copy, its actual var

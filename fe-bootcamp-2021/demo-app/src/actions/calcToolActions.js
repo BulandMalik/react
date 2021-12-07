@@ -1,33 +1,19 @@
-//define list of actions calculator will do
+export const ADD_ACTION = 'ADD';
+export const SUBTRACT_ACTION = 'SUBTRACT';
+export const MULTIPLY_ACTION = 'MULTIPLY';
+export const DIVIDE_ACTION = 'DIVIDE';
+export const CLEAR_ACTION = 'CLEAR';
+export const DELETE_HISTORY_ENTRY_ACTION = 'DELETE_HISTORY_ENTRY';
 
-export const ADD_ACTION = "ADD";
-export const SUBSTRACT_ACTION = 'SUBTRACT';
-export const MULTIPLY_ACTION = 'multiply';
-export const DIVIDE_ACTION = 'divide';
-export const CLEAR_ACTION = 'clear';
-export const DELETE_ACTION = 'delete';
-
-//function to produce payload for each action
-export const createAddAction = value => (
-    { type: ADD_ACTION, payload: { value } }
-);
-
-export const createSubstractAction = value => (
-    { type: SUBSTRACT_ACTION, payload: { value } }
-);
-
-export const createMultiplyAction = value => (
-    { type: MULTIPLY_ACTION, payload: { value } }
-);
-
-export const createDivideAction = value => (
-    { type: DIVIDE_ACTION, payload: { value } }
-);
-
-export const createClearAction = () => (
-    { type: CLEAR_ACTION, payload: {  } }
-);
-
-export const createDeleteAction = (value) => (
-    { type: DELETE_ACTION, payload: { value } }
-);
+export const createAddAction = value =>
+  ({ type: ADD_ACTION, payload: { value } });
+export const createSubtractAction = value =>
+  ({ type: SUBTRACT_ACTION, payload: { value } });
+ export const createMultiplyAction = value =>
+  ({ type: MULTIPLY_ACTION, payload: { value } });
+export const createDivideAction = value =>
+  ({ type: DIVIDE_ACTION, payload: { value } });
+export const createClearAction = () =>
+  ({ type: CLEAR_ACTION });
+export const createDeleteHistoryEntryAction = entryId =>
+  ({ type: DELETE_HISTORY_ENTRY_ACTION, payload: { entryId } });      

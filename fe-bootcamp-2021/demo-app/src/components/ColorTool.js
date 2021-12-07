@@ -1,9 +1,10 @@
 //import { useColorToolStore } from "../hooks/useColorToolStore";
-import { useColorToolStoreContext } from "../context/colorToolStoreContext";
+//import { useColorToolStoreContext } from "../context/colorToolStoreContext";
 
 //import { ToolHeader } from "./ToolHeader";
 import { ColorList } from './ColorList';
 import { ColorForm } from './ColorForm';
+import { useColorToolReduxStore } from "../hooks/useColorToolReduxStore";
 
 //export const ColorTool = ( {cars: initialCars} ) => {
 //export const ColorTool = (props) => {
@@ -26,11 +27,13 @@ export const ColorTool = () => {
 //const store = useColorToolStore([...props.colors]);
 
 //this makes this children a consumer of Context
-const store = useColorToolStoreContext();
+//const store = useColorToolStoreContext();
+const store = useColorToolReduxStore();
 
   return (
     <>
-      <ColorList colors={store.sortedColors} onDeleteColor={store.removeColor}/>
+
+      <ColorList colors={store.sortedColors} onDeleteColor={store.deleteColor}/>
       <ColorForm buttonText="Add Color" onSubmitColor={store.addColor}/>
       <button type="button" id="sort" onClick={store.sortColors}>Current Sort: {store.sortCol}-{store.sortDir}</button>
     </>

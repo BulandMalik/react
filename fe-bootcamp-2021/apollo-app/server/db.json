@@ -1,0 +1,107 @@
+{
+  "authors": [
+    {
+      "id": 1,
+      "firstName": "Jim",
+      "lastName": "Smith",
+      "phoneNumber": "454-454-2345"
+    },
+    {
+      "id": 2,
+      "firstName": "Abby",
+      "lastName": "Thompkins",
+      "phoneNumber": "123-454-2345"
+    },
+    {
+      "id": 3,
+      "firstName": "Tim",
+      "lastName": "Jones",
+      "phoneNumber": "678-454-2345"
+    },
+    {
+      "firstName": "Bob",
+      "lastName": "Smith",
+      "id": 4,
+      "phoneNumber": "190-454-2345"
+    },
+    {
+      "firstName": "Jody",
+      "lastName": "Smith",
+      "id": 5,
+      "phoneNumber": "256-454-2345"
+    },
+    {
+      "firstName": "Sean",
+      "lastName": "Thomas",
+      "phoneNumber": "123-123-1234",
+      "id": 6
+    },
+    {
+      "firstName": "Sally",
+      "lastName": "Thomas",
+      "phoneNumber": "123-123-1323",
+      "id": 7
+    },
+    {
+      "firstName": "Natalie",
+      "lastName": "Timmons",
+      "phoneNumber": "123-123-1234",
+      "id": 8
+    },
+    {
+      "firstName": "Sally",
+      "lastName": "Thomas",
+      "phoneNumber": "123-123-1234",
+      "id": 9
+    },
+    {
+      "firstName": "Buland",
+      "lastName": "Malik",
+      "phoneNumber": "0091230098",
+      "id": 10
+    },
+    {
+      "firstName": "Buland",
+      "lastName": "Malik",
+      "phoneNumber": "0091230098",
+      "id": 11
+    },
+    {
+      "firstName": "Buland",
+      "lastName": "Malik",
+      "phoneNumber": "0091230098",
+      "id": 12
+    },
+    {
+      "firstName": "Buland",
+      "lastName": "Malik",
+      "phoneNumber": "0091230098",
+      "id": 13
+    },
+    {
+      "firstName": "Buland",
+      "lastName": "Altaf",
+      "phoneNumber": "4088062613",
+      "id": 14
+    }
+  ],
+  "books": [
+    {
+      "id": 5,
+      "isbn": "111222AAAE",
+      "title": "Debating Silence",
+      "authorId": 3,
+      "category": "Humor",
+      "price": 7.99,
+      "quantity": 6
+    },
+    {
+      "isbn": "111222AAABBM",
+      "authorId": "1",
+      "category": "Math",
+      "price": 5.99,
+      "quantity": 8,
+      "id": 8
+    }
+  ]
+}

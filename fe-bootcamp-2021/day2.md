@@ -351,3 +351,179 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 5. useEfftect, renders during rendering only if dependencies are not changed
 6. useMemo, memoize compnents after render and only re-renders if dependencies are changed
 7. dispatch function never changes
+
+
+### redux dev tool extention
+1. `npm install redux-devtools-extention`
+2. 
+
+### Appolo
+1. nodemon - hot deployments (retsrat when change happens)
+2. GraphQL Fragments
+```
+query  {
+  colors
+  quantity
+  price
+  person1: person {
+    ...personDetails
+  }
+  person2: person {
+    ...personDetails
+  }  
+}
+
+fragment personDetails on Person {
+  id
+  firstName
+  lastName
+}
+```
+3. Appolo Resolves
+```
+import fetch from 'node-fetch';
+
+export const resolvers = {
+  Query: {
+    message() {
+      return 'Welcome to React and Apollo!';
+    },
+    colors: () => (['red','green','blue']),
+    quantity: () => 42,
+    price: () => 2.34,
+    person: () => ([
+      {
+        id: 1,
+        firstName: 'Bob',
+        lastName: 'Smith',
+        age: 39
+      },
+      {
+        id: 1,
+        firstName: 'Bob',
+        lastName: 'Wish',
+        age: 29
+      },
+      {
+        id: 1,
+        firstName: 'Smith',
+        lastName: 'Chal',
+        age: 45
+      }
+    ]),
+    authors: () => {
+      return fetch('http://localhost:5050/authors')
+        .then(res => res.json());
+    }
+  },
+};
+```
+4. Appolo Client
+    1. Local State
+    2. Remote State - `pulling/update state from/to the server`
+5. json-server --port 5050 --delay 5000 db.json
+6. GraphQL SChema
+```
+import { gql } from 'apollo-server-express';
+
+export const typeDefs = gql`
+  type Query {
+    message: String
+    colors: [String]
+    quantity: Int
+    price: Float
+    person: [Person]
+    authors: [Author]
+    books: [Book]
+  }
+
+  type Person {
+    id: ID
+    firstName: String
+    lastName: String
+    age: Int
+  }
+
+  type Author {
+    id: ID
+    firstName: String
+    lastName: String
+    phoneNumber: String
+  }
+
+  type Book {
+    id: ID
+    isbn: String
+    authorId: ID
+    category: String
+    price: Float
+    quantity: Int
+  }
+
+`;
+```
+7. Mutations
+    1. appendAuthor is a method
+    2. author is a parameter of type NewAuthor
+    3. Author is the return type
+```
+type mutation {
+    appendAuthor(author: NewAUthor): Author
+  }
+
+  input NewAUthor {
+    firstName: String,
+    lastName: String,
+    phoneNumber: String
+  }
+```
+```
+---Resolver
+  Mutation: {
+    appendAuthor: (_, args) => {
+
+      return fetch('http://localhost:5050/authors', {
+        method: 'POST',
+        headers: 'Content-Type: application/json',
+        body: JSON.stringify(args.author),
+      }).then(res => res.jsopn());
+
+    },
+
+    appendAuthorAsync: async (_, /*args*/ {author} ) => {
+
+      const res = await fetch('http://localhost:5050/authors', {
+        method: 'POST',
+        headers: 'Content-Type: application/json',
+        body: JSON.stringify(author),//args.author),
+      });
+      
+      const author = await res.jsopn();
+      return author;
+    }    
+  }
+```
+8. How to test in GraphQL playground - https://studio.apollographql.com/sandbox/explorer
+```
+mutation AppendBook($newBook: NewBook) {
+  appendBook(book: $newBook) {
+    id
+    isbn
+    category
+    price
+    quantity
+  }
+}
+
+--- Variables
+{
+  "newBook": {
+    "isbn": "111222AAABBM",
+    "category": "Math",
+    "authorId": "1",
+    "price": 5.99,
+    "quantity": 8
+  }
+}
+```
+9. 

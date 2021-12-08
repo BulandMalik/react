@@ -1,3 +1,4 @@
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -5,7 +6,8 @@ import { sortedItemsSelector } from "../selectors/itemToolSelectors";
 
 import { 
     createAddAction, createEditAction, createDeleteAction, 
-    createSaveAction, createSortAction, createCancelAction
+    createSaveAction, createSortAction, createCancelAction,
+    refreshCars, addCarFn, saveCarFn, deleteCarFn
 } from "../actions/carToolActions";
 
 export const useCarToolRedusStore = () => {
@@ -20,14 +22,22 @@ export const useCarToolRedusStore = () => {
 
     const dispatch = useDispatch();
 
-    const actions = bindActionCreators({
-        addCar: createAddAction,
+    const actions = useMemo( () => bindActionCreators({
+        refreshCars,
+        //addCar: createAddAction,
+        addCar: addCarFn,
         editCar: createEditAction,
-        saveCar: createSaveAction,
-        deleteCar: createDeleteAction,
+        //saveCar: createSaveAction,
+        saveCar: saveCarFn,
+        //deleteCar: createDeleteAction,
+        deleteCar: deleteCarFn,
         cancelCar: createCancelAction,
         sortCars: createSortAction
-    }, dispatch);
+    }, dispatch), [dispatch]);
+
+    useEffect( () => {
+        actions.refreshCars(); //stale closure as every render bind creates new refreshColors
+    }, [actions]); //actions chnages every single render, thast the problem
 
     return {
         sortedCars,

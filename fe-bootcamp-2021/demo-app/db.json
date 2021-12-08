@@ -1,12 +1,51 @@
 {
   "colors": [
-    { "id": 1, "name": "red", "hexcode": "#ff0000" },
-    { "id": 2, "name": "green", "hexcode": "#00ff00" },
-    { "id": 3, "name": "blue", "hexcode": "#0000ff" }
+    {
+      "id": 2,
+      "name": "green",
+      "hexcode": "#00ff00"
+    }
   ],
   "cars": [
-    {"id":1,"make":"Ford","model":"Fusion Hybrid","year":2019,"color":"blue","price":45000},
-    {"id":2,"make":"Tesla","model":"S","year":2018,"color":"red","price":100000}
+    {
+      "id": 2,
+      "make": "Tesla",
+      "model": "S",
+      "year": 2018,
+      "color": "red",
+      "price": 100000
+    },
+    {
+      "make": "Nissan",
+      "model": "Pathfinder",
+      "color": "Blue",
+      "year": 2020,
+      "price": 42000,
+      "id": 4
+    },
+    {
+      "make": "Nissan",
+      "model": "Pathfinder",
+      "color": "RED",
+      "year": 2021,
+      "price": 45000,
+      "id": 34
+    },
+    {
+      "make": "Nissan",
+      "model": "Pathfinder",
+      "color": "RED",
+      "year": 2021,
+      "price": 45000,
+      "id": 35
+    },
+    {
+      "make": "Honda",
+      "model": "Corola",
+      "year": 1900,
+      "color": "Green",
+      "price": 2300,
+      "id": 38
+    }
   ]
 }
-

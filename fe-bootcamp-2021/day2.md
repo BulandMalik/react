@@ -341,3 +341,13 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 9. CPU Bound vs IO Bound processings
 10. For closure, Stack frames moved to heap to retain closure data
 11. when you refrence a var via closure, its not a copy, its actual var
+
+
+#### Async/Await
+1. res.json is an async vs JSON.parse is a sync process, res.json() not using main thread
+2. await in front of calls retuning promises
+3. await does not block the code, it just says once this call complete, move forward (no need to use .then)
+4. npm install redux-thunk
+5. useEfftect, renders during rendering only if dependencies are not changed
+6. useMemo, memoize compnents after render and only re-renders if dependencies are changed
+7. dispatch function never changes

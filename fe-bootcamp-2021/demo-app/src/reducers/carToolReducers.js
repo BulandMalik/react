@@ -1,23 +1,27 @@
 import { 
     ADD_ACTION, EDIT_ACTION, DELETE_ACTION, 
-    SAVE_ACTION, SORT_ITEMS_ACTION, CANCEL_ACTION
+    SAVE_ACTION, SORT_ITEMS_ACTION, CANCEL_ACTION, 
+    REFRESH_CARS_DONE_ACTION, ADD_CAR_REQUEST_ACTION,
+    SAVE_CAR_REQUEST_ACTION, DELETE_CAR_REQUEST_ACTION
 } from '../actions/carToolActions';
 
 import { combineReducers } from 'redux';
 
 import { SORT_ASC, SORT_DESC } from '../hooks/useSortedList';
 
+/*
 const carList = [
     {id:1, make:'Toyota', model:'Sienna', year:2020, color:'Silver', price:'30000'},
     {id:2, make:'Toyota', model:'Corola', year:2021, color:'Green', price:'35000'},
     {id:3, make:'Toyota', model:'Sienna', year:2021, color:'Red', price:'32000'},
   ]
+*/
 
-export const carReducer = ( cars = carList, action) => {
+export const carReducer = ( cars = [], action) => {
 
     //console.log("carReducer::",cars, ", action::",action);
     switch (action.type) {
-        case ADD_ACTION:
+/*        case ADD_ACTION:
             return [
                 ...cars,
                 {
@@ -33,7 +37,9 @@ export const carReducer = ( cars = carList, action) => {
                 return newItems;
             }
         case DELETE_ACTION:
-            return cars.filter( car => car.id !== action.payload.itemId );
+            return cars.filter( car => car.id !== action.payload.itemId );*/
+        case REFRESH_CARS_DONE_ACTION:
+            return action.payload.cars;              
         default:
             return cars;            
     };
@@ -43,9 +49,13 @@ export const itemEditReducer = ( itemId = -1, action) => {
 
     //console.log("itemEditReducer::",itemId, ", action::",action);
     switch (action.type) {
-        case ADD_ACTION: 
+        /*case ADD_ACTION: 
         case SAVE_ACTION:
         case DELETE_ACTION:
+        case CANCEL_ACTION:*/
+        case ADD_CAR_REQUEST_ACTION:
+        case SAVE_CAR_REQUEST_ACTION:
+        case DELETE_CAR_REQUEST_ACTION:
         case CANCEL_ACTION:
         {
             //console.log("itemEditReducer --> -1");

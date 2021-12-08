@@ -73,7 +73,7 @@
 
       // console.log("b");
 
-      const delay = () => Math.floor(Math.random() * 1000) + 500;
+      //const delay = () => Math.floor(Math.random() * 1000) + 500;
 
       // setTimeout(() => {
       //   console.log("a");
@@ -92,12 +92,12 @@
       // 3. You can modify the code however you want except for the following:
         // - No promises
         // - The console logs for a, b, c must run in different tasks
-
+/*  
       function allDone() {
         console.log('all done');
       }
 
-/*      
+    
       setTimeout(() => {
         console.log('a1');
 
@@ -113,7 +113,7 @@
 
 
       }, delay());      
-*/
+
 
       let callbackCounter = 3;
       function amIDone () {
@@ -141,7 +141,162 @@
         amIDone() && allDone();
       }, delay());
 
+      const taskA = () => new Promise(resolve => setTimeout(() => resolve('a'), delay()));
+      const taskB = () => new Promise(resolve => setTimeout(() => resolve('b'), delay()));
+      const taskC = () => new Promise(resolve => setTimeout(() => resolve('c'), delay()));
 
+      Promise.all([taskA(), taskB(), taskC()]).then(results => {
+        console.log("all done");
+        console.log(results);
+      });            
+*/
+    </script>
+
+    <script>
+/*
+      //make Ajax call using JS
+      //XHR and fetch api's
+      //XHR from Microsoft
+      const xhr = new XMLHttpRequest();
+      xhr.addEventListener("readystatechange", () => {
+        if (xhr.status === 200 && xhr.readyState === 4) {
+          console.log("response::",JSON.parse(xhr.responseText));
+        }
+      });
+
+      xhr.open("GET", "http://localhost:3060/cars");
+      xhr.send();
+*/
+
+/*
+      p.then( cars => {
+        console.log("response after Promoise::",cars);
+      })
+      .catch(errorMessage => {
+        console.log("errorMessage::",errorMessage);
+      });
+*/
+/*
+      function myFetch (url) {
+        return new Promise( (resolve,reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.addEventListener("readystatechange", () => {
+            if (xhr.readyState === 4) { //is it done
+              if ( xhr.status === 200 ) //is it done & successful
+                resolve(JSON.parse(xhr.responseText));
+              else //its done & failed (other than 200 status code)
+              reject("error with status code:"+xhr.status);
+            }
+            else { // still processing
+              //reject("error with status code:"+xhr.status);
+              console.log("still processing ....")
+            }
+          });
+
+          //TODO:: might have to look for httpMethod and handle it differently get/post etc.
+          xhr.open("GET", url);
+          xhr.send();        
+        });        
+
+      };
+
+      myFetch("http://localhost:3060/cars").then( cars => {
+        console.log("cars:",cars);
+      })
+      .catch(errorMessage => {
+        console.log("errorMessage ==>",errorMessage);
+      });
+
+
+      myFetch("http://localhost:3060/colors").then( colors => {
+        console.log("colors:",colors);
+        colors.forEach( color => {
+          myFetch(`http://localhost:3060/colors/${color.id}`).then( color => {
+          //myFetch("http://localhost:3060/colors/1").then( color => {
+            console.log("color =>", color);
+          })
+          .catch(errorMessage => {
+            console.log("errorMessage ==>",errorMessage);
+          });    
+        });  
+      })
+      .catch(errorMessage => {
+        console.log("errorMessage ==>",errorMessage);
+      });      
+then()
+      myFetch("http://localhost:3060/colors").then( colors => {
+        //console.log("colors:",colors);
+        const promises = colors.map( color => {
+          return myFetch(`http://localhost:3060/colors/${color.id}`); //return a promise
+        });
+
+        //console.log(promises);
+
+        Promise.all(promises).then(results => { //resolve all the promises
+          console.log("all done");
+          console.log(results);
+        });        
+      })
+      .catch(errorMessage => {
+        console.log("errorMessage ==>",errorMessage);
+      });      
+*/
+/*
+
+      //fetch api
+      fetch("http://localhost:3060/cars")
+        .then( res => res.json()) //res.json is an async vs JSON.parse is a sync process, res.json() not using main thread
+        .then( cars => console.log(cars));
+
+        fetch("http://localhost:3060/cars/1")
+        .then( res => res.json()) //res.json is an async vs JSON.parse is a sync process, res.json() not using main thread
+        .then( car => console.log(car));
+
+        //add a car
+        fetch("http://localhost:3060/cars", { //options obj
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify( {
+            make: 'Nissan', model: 'Pathfinder', 
+            color: 'RED', year: 2021, price: 45000
+          }),
+        })
+        .then( res => {
+          for (let key of res.headers.keys()) {
+            console.log("header ",key," : ",res.headers.get(key));
+          }
+          res.json(); //res.json is an async vs JSON.parse is a sync process, res.json() not using main thread
+        })
+        .then( car => console.log("New Car:",car));        
+
+/*        
+        //replace
+        fetch("http://localhost:3060/cars/4", { //options obj
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify( {
+            make: 'Nissan', model: 'Pathfinder', 
+            color: 'Blue', year: 2020, price: 42000
+          }),
+        });
+        
+
+        //delete
+        fetch("http://localhost:3060/cars/3", { //options obj
+          method: 'DELETE',
+        });
+
+
+        const carId = 5;
+        //replace
+        fetch(`http://localhost:3060/cars/${carId}`, { //options obj
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify( {
+            model: 'Morana', 
+          }),
+        });        
+*/
     </script>
   </body>
 </html>

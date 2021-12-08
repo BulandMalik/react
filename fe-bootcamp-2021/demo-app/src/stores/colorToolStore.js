@@ -1,5 +1,10 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
 import { colorToolReducer } from '../reducers/colorToolReducers';
 
-export const colorToolStore = createStore(colorToolReducer);
+import thunk from 'redux-thunk';
+
+export const colorToolStore = createStore(
+    colorToolReducer,
+    applyMiddleware(thunk),
+);
